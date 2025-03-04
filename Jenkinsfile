@@ -2,6 +2,10 @@ pipeline {
     agent any
 
     stages {
+        /* 
+        This is the block comment
+        # - this is single line shell comment symbol
+        */
         stage('Build') {
             agent{
                 docker{
