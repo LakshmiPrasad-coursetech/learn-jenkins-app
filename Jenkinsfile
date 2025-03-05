@@ -24,8 +24,11 @@ pipeline {
                 '''
             }
         }
-        stage('Test'){
-            agent{
+
+        stage('Run Tests'){
+            parallel{
+             stage('Test'){
+                agent{
                 docker{
                     image 'node:18-alpine'
                     reuseNode true
@@ -57,6 +60,9 @@ pipeline {
                 '''
             }
         }
+            }
+        }
+        
     }
     post{
         always{
