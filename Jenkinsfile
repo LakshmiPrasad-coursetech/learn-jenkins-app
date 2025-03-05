@@ -6,6 +6,7 @@ pipeline {
         This is the block comment
         # - this is single line shell comment symbol
         */
+        /*
         stage('Build') {
             agent{
                 docker{
@@ -24,10 +25,11 @@ pipeline {
                 '''
             }
         }
+        */
 
         stage('Run Tests'){
             parallel{
-             stage('Test'){
+             stage('Unit tests'){
                 agent{
                 docker{
                     image 'node:18-alpine'
@@ -41,6 +43,11 @@ pipeline {
                 npm test
                 '''
             }
+            post{
+        always{
+            junit 'jest-results/junit.xml'
+        }
+    }
         }
         stage('E2E'){
             agent{
@@ -59,15 +66,16 @@ pipeline {
                 npx playwright test --reporter=html
                 '''
             }
-        }
-            }
-        }
-        
-    }
-    post{
+            post{
         always{
             junit 'jest-results/junit.xml'
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
         }
     }
+        }
+            }
+        }
+        
+    }
+    
 }
