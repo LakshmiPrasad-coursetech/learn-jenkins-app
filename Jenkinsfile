@@ -17,6 +17,7 @@ pipeline {
             }
             steps {
                 sh '''
+                echo "Checking polling"
                     ls -la
                     node --version
                     npm --version
