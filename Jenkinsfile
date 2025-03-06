@@ -109,9 +109,9 @@ stages {
                         reuseNode true
                     }
                 }
-               /*environment{
-                    CI_ENVIRONMENT_URL = "${env.STAGING_URL}"
-                }*/
+               environment{
+                    CI_ENVIRONMENT_URL = 'Staging URL to be set yet'
+                }
 
                 steps {
                     sh '''
