@@ -99,7 +99,7 @@ stages {
             env.STAGING_URL = sh(script: "node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json", returnStdout: true)
         }
 
-    }
+        }
         
     }
     stage(' Staging E2E') {
@@ -124,8 +124,7 @@ stages {
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Staging E2E Report', reportTitles: '', useWrapperFileDirectly: true])
                     }
                 }
-            }
-}
+    }
     stage('Approval'){
         steps{
                 timeout(time: 15, unit: 'MINUTES'){
@@ -174,6 +173,7 @@ stages {
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Prod E2E Report', reportTitles: '', useWrapperFileDirectly: true])
                     }
                 }
-            }
+    }
+}
 }
 
