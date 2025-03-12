@@ -27,6 +27,7 @@ stages {
                 sh '''
             aws --version
             aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json
+            aws ecs update-service --cluster LearnJenkinsApp-Cluster-Prod1 --service LearnJenkinsApp-Service-Prod --task-definition LearnJenkinsApp-TaskDefinition-Prod:2
             '''
             }
             // aws s3 sync build s3://$AWS_S3_BUCKET
@@ -129,7 +130,7 @@ stages {
         
     }
     */
-    stage(' Deploy Staging') {
+    /*stage(' Deploy Staging') {
                 agent {
                     docker {
                         image 'my-playwright'
@@ -157,7 +158,7 @@ stages {
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Staging E2E Report', reportTitles: '', useWrapperFileDirectly: true])
                     }
                 }
-    }
+    }*/
     /*stage('Approval'){
         steps{
                 timeout(time: 15, unit: 'MINUTES'){
@@ -166,7 +167,7 @@ stages {
         }
     }*/
 
-    stage(' Deploy Prod') {
+   /* stage(' Deploy Prod') {
                 agent {
                     docker {
                         image 'my-playwright'
@@ -194,7 +195,7 @@ stages {
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Prod E2E Report', reportTitles: '', useWrapperFileDirectly: true])
                     }
                 }
-    }
+    }*/
 }
 }
 
