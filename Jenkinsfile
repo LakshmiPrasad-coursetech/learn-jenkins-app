@@ -55,12 +55,14 @@ stage('Build Docker Image'){
             docker{
                 image 'my-aws-cli'
                 reuseNode true
-                args "-u root --entrypoint=''"
+                args "--entrypoint=''"
             }
         }
+        /*
         environment{
             AWS_S3_BUCKET = 'learn-jenkins-032025'
         }
+        */
         steps{
             withCredentials([usernamePassword(credentialsId: 'my-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                 sh '''
